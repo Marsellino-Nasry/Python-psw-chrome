@@ -25,12 +25,12 @@ This Python script extracts saved passwords from Google Chrome on a Windows mach
 
 ## Usage
 
-1. Save the script as `chrome_password_extractor.py`.
+1. Save the script as `testchrome.py`.
 2. Open Command Prompt or Terminal.
 3. Navigate to the directory where the script is located.
 4. Run the script using Python:
     ```bash
-    python chrome_password_extractor.py
+    testchrome.py
     ```
 5. The script will display the saved passwords in the console.
 
