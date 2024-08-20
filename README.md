@@ -38,6 +38,3 @@ This Python script extracts saved passwords from Google Chrome on a Windows mach
 
 This script is intended for educational purposes only. Unauthorized access to personal data, including passwords, is illegal and unethical. Use this tool only on systems where you have explicit permission to do so.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
